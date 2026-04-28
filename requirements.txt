@@ -1,2 +1,2 @@
-# Project dependencies
+# Runtime dependency. Packaging metadata is defined in pyproject.toml.
 Pillow>=10.0.0
