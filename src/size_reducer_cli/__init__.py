@@ -1,5 +1,5 @@
 """Image size reduction utilities."""
 
-from .reducer import ImageReductionResult, compress_image
+from .reducer import ReductionResult, compress_file, compress_image, compress_pdf
 
-__all__ = ["ImageReductionResult", "compress_image"]
+__all__ = ["ReductionResult", "compress_file", "compress_image", "compress_pdf"]

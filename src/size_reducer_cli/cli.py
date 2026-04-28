@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 from collections.abc import Sequence
 
-from .reducer import CompressionError, UnsupportedFormatError, compress_image
+from .reducer import CompressionError, UnsupportedFormatError, compress_file
 
 
 def positive_int(value: str) -> int:
@@ -19,11 +19,11 @@ def positive_int(value: str) -> int:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="A lightweight CLI tool to reduce image file size."
+        description="A lightweight CLI tool to reduce image and PDF file size."
     )
     parser.add_argument(
         "file_path",
-        help="Path to the input image file, such as photo.jpg",
+        help="Path to the input image or PDF file, such as photo.jpg or document.pdf",
     )
     parser.add_argument(
         "-m",
@@ -40,7 +40,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     try:
-        result = compress_image(args.file_path, args.max_size)
+        result = compress_file(args.file_path, args.max_size)
     except FileNotFoundError as exc:
         missing_path = exc.filename or exc.args[0]
         print(f"Error: File '{missing_path}' not found.")
@@ -53,19 +53,26 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 1
 
     if result.target_size_kb is not None and not result.target_met:
+        note = " PDF compression is lossless and may only reduce some files modestly." if result.media_type == "pdf" else ""
         print(
             "Warning: Target size was not reached. "
-            f"Lowest size achieved: {result.size_kb:.2f} KB"
+            f"Lowest size achieved: {result.size_kb:.2f} KB.{note}"
         )
     elif result.target_size_kb is not None:
         print(
-            "Success: Compressed image saved to "
+            f"Success: Compressed {_media_label(result.media_type)} saved to "
             f"'{result.output_path}' ({result.size_kb:.2f} KB)"
         )
     else:
         print(
-            "Success: Optimized image saved to "
+            f"Success: Optimized {_media_label(result.media_type)} saved to "
             f"'{result.output_path}' ({result.size_kb:.2f} KB)"
         )
 
     return 0
+
+
+def _media_label(media_type: str) -> str:
+    if media_type == "pdf":
+        return "PDF"
+    return media_type

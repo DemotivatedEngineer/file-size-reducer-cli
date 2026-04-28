@@ -1,2 +1,4 @@
 # Runtime dependency. Packaging metadata is defined in pyproject.toml.
 Pillow>=10.0.0
+pillow-heif>=1.0.0
+pypdf>=6.0.0

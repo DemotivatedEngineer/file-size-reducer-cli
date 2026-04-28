@@ -1,2 +1,0 @@
-[console_scripts]
-size-reducer = size_reducer_cli.cli:main
