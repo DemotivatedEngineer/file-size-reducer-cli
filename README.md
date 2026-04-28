@@ -25,9 +25,29 @@ Supported input/output extensions are `.jpg`, `.jpeg`, `.png`, `.webp`,
 
 ## Installation
 
-Install directly from GitHub:
+Install as a CLI app with `pipx`:
 
 ```bash
+brew install pipx
+pipx ensurepath
+pipx install git+https://github.com/DemotivatedEngineer/file-size-reducer-cli.git
+```
+
+Restart your terminal after `pipx ensurepath`, then verify:
+
+```bash
+size-reducer --help
+```
+
+`pipx` is recommended for normal CLI usage because newer Homebrew Python
+versions block global `pip install` with an `externally-managed-environment`
+error.
+
+Install with `pip` inside a virtual environment:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
 python3 -m pip install git+https://github.com/DemotivatedEngineer/file-size-reducer-cli.git
 ```
 
@@ -36,6 +56,8 @@ Install from a local clone:
 ```bash
 git clone https://github.com/DemotivatedEngineer/file-size-reducer-cli.git
 cd file-size-reducer-cli
+python3 -m venv venv
+source venv/bin/activate
 python3 -m pip install .
 ```
 
@@ -50,7 +72,7 @@ python3 -m pip install -e .
 Future PyPI install, after the package is published:
 
 ```bash
-python3 -m pip install size-reducer-cli
+pipx install size-reducer-cli
 ```
 
 ## Usage
