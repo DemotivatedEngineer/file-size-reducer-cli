@@ -28,17 +28,14 @@ Supported input/output extensions are `.jpg`, `.jpeg`, `.png`, `.webp`,
 Install directly from GitHub:
 
 ```bash
-python3 -m pip install git+https://github.com/YOUR_USERNAME/SizeReducerCLI.git
+python3 -m pip install git+https://github.com/DemotivatedEngineer/file-size-reducer-cli.git
 ```
-
-Replace `YOUR_USERNAME` with your actual GitHub username after pushing this
-repository to GitHub.
 
 Install from a local clone:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/SizeReducerCLI.git
-cd SizeReducerCLI
+git clone https://github.com/DemotivatedEngineer/file-size-reducer-cli.git
+cd file-size-reducer-cli
 python3 -m pip install .
 ```
 
